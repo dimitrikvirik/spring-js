@@ -21,11 +21,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests(authorize -> authorize.antMatchers(
                         "/v2/api-docs",
-                        "/api/v1/auth/**",
-                        "/api/v1/sms/**",
-                        "/web/**",
+                        "/api/auth/**",
                         "/actuator/health/**",
-                        "/actuator/refresh").permitAll()
+                        "/actuator/refresh",
+                         "/",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/**/*.ico"
+                                ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

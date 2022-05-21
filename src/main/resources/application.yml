@@ -3,6 +3,8 @@ server:
     include-message: always
   port: ${COMMON_PORT}
 spring:
+  application:
+    name: spring-js
   mvc:
     log-resolved-exception: true
   servlet:
@@ -36,7 +38,6 @@ auth:
 common:
   keycloak:
     token-uri: ${KEYCLOAK_HOST}/auth/realms/${REALM}/protocol/openid-connect/token
-    authorization-uri: ${KEYCLOAK_HOST}/auth/realms/${REALM}/protocol/openid-connect/auth
-    client-id: ${KEYCLOAK_CLIENT}
+
 
 
