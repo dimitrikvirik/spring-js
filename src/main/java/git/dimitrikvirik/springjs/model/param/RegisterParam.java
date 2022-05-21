@@ -12,14 +12,14 @@ import javax.validation.constraints.Size;
 public class RegisterParam {
 
     @Size(min = 3, max = 30)
-    private String username;
+    private String Username;
     @Max(30)
-    private String firstName;
+    private String Firstname;
     @Max(30)
-    private String lastName;
+    private String Lastname;
 
     @ValidEmail
-    private String email;
+    private String Email;
     @Size(min = 8, max = 20)
-    private String password;
+    private String Password;
 }
