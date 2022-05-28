@@ -63,6 +63,10 @@ public class KeycloakService {
     }
 
 
+
+
+
+
     public UserRepresentation create(UserRepresentation userRepresentation) {
         keycloak.realm(realm).users().create(userRepresentation);
         return keycloak.realm(realm).users().search(userRepresentation.getUsername()).get(0);

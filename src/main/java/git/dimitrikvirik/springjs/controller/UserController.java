@@ -7,6 +7,7 @@ import git.dimitrikvirik.springjs.model.param.UserUpdateParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,8 +25,9 @@ public class UserController {
     }
 
     @PutMapping("/{username}")
+    @PreAuthorize("@authService.sameUsername(#username)")
     public ResponseEntity<UserAccountDTO> updateUser(@PathVariable String username ,@Valid @RequestBody UserUpdateParam userUpdateParam){
-        return null;
+        return new ResponseEntity<>(userFacade.updateUser(username, userUpdateParam), HttpStatus.OK);
     }
 
 

@@ -4,22 +4,7 @@ function switchToSignUp() {
 function switchToSignIn() {
     document.getElementById("tab-login").click()
 }
-
 let allInputs = $("input")
-function clearErrors(){
-    allInputs.removeClass("is-invalid")
-}
-function addError(field, message){
-    $("#" + field + "Error").text(message)
-    $("#" + field).addClass("is-invalid")
-}
-
-
-
-allInputs.on("input",function (){
-    clearErrors()
-})
-
 $("#singUpButton").click(function () {
     clearErrors()
     let username = $("#registerUsername")
@@ -66,6 +51,17 @@ $("#singUpButton").click(function () {
 
         })
     }
+})
+
+function clearErrors(){
+    allInputs.removeClass("is-invalid")
+}
+function addError(field, message){
+    $("#" + field + "Error").text(message)
+    $("#" + field).addClass("is-invalid")
+}
+allInputs.on("input",function (){
+    clearErrors()
 })
 
 $("#signInButton").click(function (){

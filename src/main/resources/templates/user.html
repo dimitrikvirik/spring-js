@@ -9,6 +9,13 @@
     <script src="/js/main.js"></script>
     <script src="/js/authCheck.js"></script>
     <style>
+
+        .editProfile{
+            display: none;
+        }
+        .showProfile{
+            display: block;
+        }
         html{
             height: 100%;
         }
@@ -52,17 +59,24 @@
             <div class="col col-lg-9 col-xl-7">
                 <div class="card">
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
-                        <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                        <div class="ms-4 mt-4 d-flex flex-column" style="width: 150px;">
                             <img src="https://lh3.googleusercontent.com/-JM2xsdjz2Bw/AAAAAAAAAAI/AAAAAAAAAAA/DVECr-jVlk4/photo.jpg"
                                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                  style="width: 150px; z-index: 1">
+                        <div style="z-index: 5; height: auto">
                             <button id="profileEditButton"  type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                    style="z-index: 1;">
+                                    >
                                 Edit profile
                             </button>
                         </div>
-                        <div class="ms-3" style="margin-top: 130px;" id="profileNameBox">
-                            <h5 id="profileName"></h5>
+                        </div>
+                        <div class="ms-3" style="margin-top: 130px;" >
+                            <h5 id="profileName" class="showProfile"></h5>
+                            <div class="form-outline form-white editProfile" id="profileNameBox">
+                                <input type="text" id="profileNameInput" class="form-control active"/>
+                                <label class="form-label" for="profileNameInput">Firstname And Lastname</label>
+                                <div class="invalid-feedback" id="profileNameInputError"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="p-4 text-black" style="background-color: #f8f9fa;">
@@ -74,7 +88,12 @@
                         <div class="mb-5">
                             <p class="lead fw-normal mb-1">About</p>
                             <div class="p-4" style="background-color: #f8f9fa;" id="aboutBox">
-                                <p class="font-italic mb-1"></p>
+                                <p class="font-italic mb-1 showProfile" id="about"></p>
+                                <div class="form-outline editProfile">
+                                    <textarea class="form-control active" id="aboutInput" rows="4"></textarea>
+                                    <label class="form-label" for="aboutInput">About</label>
+                                    <div class="invalid-feedback" id="aboutInputError"></div>
+                                </div>
                             </div>
                         </div>
 

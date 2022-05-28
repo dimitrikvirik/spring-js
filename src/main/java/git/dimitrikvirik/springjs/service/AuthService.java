@@ -31,6 +31,10 @@ public class AuthService {
                         "please contact to administrator!");
         return database_id;
     }
+    public boolean sameUsername(String username){
+     return getLoggedUserAccount().getUsername().equals(username);
+    }
+
 
     @Transactional(readOnly = true)
     public UserAccount getLoggedUserAccount() {
