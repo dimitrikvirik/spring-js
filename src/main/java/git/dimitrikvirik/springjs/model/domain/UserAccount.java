@@ -20,7 +20,7 @@ public class UserAccount {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name ="keycloakId", nullable = false, unique = true)
+    @Column(name ="keycloakId", unique = true )
     private String keycloakId;
 
     @Column(name = "firstName", nullable = false)

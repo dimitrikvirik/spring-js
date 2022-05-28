@@ -1,17 +1,15 @@
-package git.dimitrikvirik.springjs.exception;
+package git.dimitrikvirik.springjs.model.exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.Data;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.server.ResponseStatusException;
-import org.thymeleaf.util.StringUtils;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -73,7 +71,7 @@ public class ExceptionBody {
 
     public static ExceptionBody of(ResponseStatusException exception, String application_name, String method_name, String exception_name, String path){
         var status = exception.getStatus().name();
-        String message = exception.getMessage();
+        String message = exception.getReason();
         var exceptionBody = new ExceptionBody(message, application_name, method_name, exception_name, path, status);
         exceptionBody.setStackTraceElements(exception.getStackTrace());
         return exceptionBody;

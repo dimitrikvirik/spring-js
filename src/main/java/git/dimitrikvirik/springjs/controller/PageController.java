@@ -11,6 +11,9 @@ public class PageController {
         return "index";
     }
 
+    @GetMapping("/auth")
+    public String auth(){ return "auth";}
+
 
 
 

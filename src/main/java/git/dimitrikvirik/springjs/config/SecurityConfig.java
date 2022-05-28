@@ -25,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/actuator/health/**",
                         "/actuator/refresh",
                          "/",
+                        "/auth",
+                        "/chat/**",
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",

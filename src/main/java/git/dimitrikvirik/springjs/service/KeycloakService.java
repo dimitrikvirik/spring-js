@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.NotFoundException;
 
 import java.util.Arrays;
@@ -141,8 +142,14 @@ public class KeycloakService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public HttpResponse<String> login(String username, String password) throws UnirestException {
+    public HttpResponse<String> login(@NotNull  String username, @NotNull String password, @NotNull Boolean rememberMe) throws UnirestException {
         Unirest.setTimeouts(0, 0);
+
+        String scope = "profile";
+        if(rememberMe){
+            scope += " offline_access";
+        }
+
         return Unirest.post(tokenUri)
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .field("username", username)
@@ -150,7 +157,7 @@ public class KeycloakService {
                 .field("client_id", clientId)
                 .field("grant_type", "password")
                 .field("client_secret", clientSecret)
-                .field("scope", "offline_access profile")
+                .field("scope", scope)
                 .asString();
     }
 

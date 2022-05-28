@@ -21,7 +21,6 @@ allInputs.on("input",function (){
 })
 
 $("#singUpButton").click(function () {
-
     clearErrors()
     let username = $("#registerUsername")
     let firstName = $("#registerFirstname")
@@ -45,13 +44,12 @@ $("#singUpButton").click(function () {
         $.ajax({
             url: "/api/auth/register",
             type: "POST",
-            dataType: "json",
             contentType: "application/json",
             async: false,
             data: JSON.stringify({
                 username: username.val(),
-                firstName: firstName.val(),
-                lastName: lastName.val(),
+                firstname: firstName.val(),
+                lastname: lastName.val(),
                 email: email.val(),
                 password: password.val()
             }),
@@ -61,9 +59,62 @@ $("#singUpButton").click(function () {
                        addError("register" +  error.field, error.defaultMessage)
                    })
                 }
+            },
+            success: function (data){
+                switchToSignIn()
             }
 
         })
     }
+})
+
+$("#signInButton").click(function (){
+    clearErrors()
+    let username = $("#loginUsername")
+    let password = $("#loginPassword")
+    let rememberMe = $("#loginCheck").is(":checked")
+
+    $.ajax({
+        url: "/api/auth/login",
+        type: "POST",
+        contentType: "application/json",
+        async: false,
+        data: JSON.stringify({
+            username: username.val(),
+            password: password.val(),
+            rememberMe: rememberMe
+        }),
+        error: function (data){
+            if(data.status === 400){
+                data.responseJSON.errors.forEach(function (error){
+                    addError("login" + error.field, error.defaultMessage)
+                })
+            }
+            else if(data.status === 401){
+                addError("loginUsername", data.responseJSON.message)
+                addError("loginPassword", data.responseJSON.message)
+            }
+        },
+      success: function (data){
+          let response = JSON.parse(data)
+          let expiresIn = new Date();
+          expiresIn.setSeconds(expiresIn.getSeconds() + response.expires_in);
+          document.cookie = "access_token="+response.access_token+";secure=true; path=/; expires="+expiresIn.toGMTString()
+
+
+          let refreshTokenExpiresIn = new Date();
+          if(response.refresh_expires_in !== 0) {
+              refreshTokenExpiresIn.setSeconds(refreshTokenExpiresIn.getSeconds() + response.refresh_expires_in);
+          }
+          else{
+              refreshTokenExpiresIn = new Date(refreshTokenExpiresIn.getFullYear() + 1, refreshTokenExpiresIn.getMonth(),  refreshTokenExpiresIn.getDay())
+          }
+          document.cookie = "refresh_token="+response.refresh_token+";secure=true; path=/; expires="+refreshTokenExpiresIn.toGMTString()
+          document.location = "/"
+
+      }
+    })
+
+
 })
 
