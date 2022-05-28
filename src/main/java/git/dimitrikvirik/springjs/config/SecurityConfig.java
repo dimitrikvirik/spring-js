@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                          "/",
                         "/auth",
                         "/chat/**",
+                        "/user/**",
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",

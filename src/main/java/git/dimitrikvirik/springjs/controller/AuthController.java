@@ -2,6 +2,7 @@ package git.dimitrikvirik.springjs.controller;
 
 
 import git.dimitrikvirik.springjs.facade.AuthFacade;
+import git.dimitrikvirik.springjs.model.domain.UserAccount;
 import git.dimitrikvirik.springjs.model.param.LoginParam;
 import git.dimitrikvirik.springjs.model.param.ReLoginParam;
 import git.dimitrikvirik.springjs.model.param.RegisterParam;
@@ -22,6 +23,8 @@ public class AuthController {
 
     private final AuthFacade authFacade;
 
+
+
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody @Valid RegisterParam registerParam){
       return new ResponseEntity<>(authFacade.register(registerParam),HttpStatus.CREATED);
@@ -36,6 +39,7 @@ public class AuthController {
     public ResponseEntity<String> reLogin(@RequestBody @Valid ReLoginParam reLoginParam){
         return new ResponseEntity<>(authFacade.reLogin(reLoginParam), HttpStatus.OK);
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(){

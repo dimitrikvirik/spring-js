@@ -29,5 +29,8 @@ public class UserAccount {
     @Column(name = "lastName", nullable = false)
     private String lastname;
 
+    @Column(name = "about", length = 5000)
+    private String about;
+
 
 }

@@ -14,6 +14,11 @@ public class PageController {
     @GetMapping("/auth")
     public String auth(){ return "auth";}
 
+    @GetMapping("/user/**")
+    public String user(){
+        return "user";
+    }
+
 
 
 

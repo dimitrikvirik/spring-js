@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Redirecting...</title>
     <script type="text/javascript"
             src="https://code.jquery.com/jquery-3.6.0.min.js">
     </script>
+    <script src="/js/main.js"></script>
     <script src="/js/authCheck.js"></script>
+    <script>
+      window.location = "/user/" + getCurrentUsername()
+    </script>
 </head>
 <body>
-    <h1>Successful Login in</h1>
+
 </body>
 </html>

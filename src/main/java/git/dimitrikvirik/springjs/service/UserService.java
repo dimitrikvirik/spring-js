@@ -1,6 +1,7 @@
 package git.dimitrikvirik.springjs.service;
 
 import git.dimitrikvirik.springjs.model.domain.UserAccount;
+import git.dimitrikvirik.springjs.model.dto.UserAccountDTO;
 import git.dimitrikvirik.springjs.repository.UserAccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,10 @@ public class UserService {
         return userAccountRepository.save(userAccount);
     }
 
+    @Transactional
+    public Optional<UserAccount> getByUsername(String username){
+      return   userAccountRepository.findByUsername(username);
+    }
 
     @Transactional(readOnly = true)
     public Optional<UserAccount> get(long id) {
