@@ -24,8 +24,6 @@ public class UserFacade {
 
     public UserAccountDTO updateUser(String username, UserUpdateParam userUpdateParam) {
         UserAccount userAccount = userService.getByUsername(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not found"));
-        userAccount.setFirstname(userUpdateParam.getFirstname());
-        userAccount.setLastname(userUpdateParam.getLastname());
         userAccount.setAbout(userUpdateParam.getAbout());
         userService.save(userAccount);
         return UserAccountDTO.from(userAccount);

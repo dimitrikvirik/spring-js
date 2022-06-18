@@ -14,6 +14,9 @@ public class UserAccount {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "profile")
+    private String profile;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
