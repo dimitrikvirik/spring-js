@@ -146,13 +146,11 @@ public class KeycloakService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public HttpResponse<String> login(@NotNull  String username, @NotNull String password, @NotNull Boolean rememberMe) throws UnirestException {
+    public HttpResponse<String> login(@NotNull  String username, @NotNull String password) throws UnirestException {
         Unirest.setTimeouts(0, 0);
 
-        String scope = "profile";
-        if(rememberMe){
-            scope += " offline_access";
-        }
+        String scope = "profile offline_access";
+
 
         return Unirest.post(tokenUri)
                 .header("Content-Type", "application/x-www-form-urlencoded")

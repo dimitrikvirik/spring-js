@@ -29,12 +29,10 @@ public class AuthFacade {
         UserAccount userAccount = new UserAccount();
         userAccount.setEmail(registerParam.getEmail());
         userAccount.setUsername(registerParam.getUsername());
-        userAccount.setFirstname(registerParam.getFirstname());
-        userAccount.setLastname(registerParam.getLastname());
         UserAccount userAccountSaved = userService.save(userAccount);
         UserRepresentation userRepresentation = keycloakService.create(KeycloakMapper.toRepresentation(
-                registerParam.getFirstname(),
-                registerParam.getLastname(),
+                registerParam.getUsername(),
+                registerParam.getUsername(),
                 registerParam.getUsername(),
                 registerParam.getPassword(),
                 userAccountSaved.getId()
@@ -48,7 +46,7 @@ public class AuthFacade {
 
     public String login(LoginParam loginParam) {
         try {
-            HttpResponse<String> login = keycloakService.login(loginParam.getUsername(), loginParam.getPassword(), loginParam.getRememberMe());
+            HttpResponse<String> login = keycloakService.login(loginParam.getUsername(), loginParam.getPassword());
             if (login.getStatus() == 401) {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong username or password");
             }

@@ -15,13 +15,6 @@ public class RegisterParam {
     @NotBlank
     private String Username;
 
-    @Length(min = 3, max = 30)
-    @NotBlank
-    private String Firstname;
-
-    @Length(min = 3, max = 30)
-    @NotBlank
-    private String Lastname;
 
     @ValidEmail
     @NotBlank
